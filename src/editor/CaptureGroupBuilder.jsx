@@ -13,16 +13,37 @@ class CaptureGroupBuilder extends Component {
         this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
         this.addNewRule = this.addNewRule.bind(this);
         this.removeRule = this.removeRule.bind(this);
+
+        this.state = {
+            uuid: props.groupUUID,
+            prefix: undefined,
+            text: undefined,
+            postfix: undefined,
+            freezeGroup: false
+        }
     }
 
     handleValidSubmit(event, values) {
         console.log("handleValidSubmit ", event, values);
-        this.props._handleValidSubmit(values);
+
+        const prefixId = `groupPrefix-${this.props.groupUUID}`;
+        const textId = `groupText-${this.props.groupUUID}`;
+        const postfixId = `groupPostfix-${this.props.groupUUID}`;
+        const groupCapturedId = `groupCaptured-${this.props.groupUUID}`;
+        const freezeGroupId = `freezeGroup-${this.props.groupUUID}`;
+
+        this.setState({
+            prefix: values[prefixId],
+            text: values[textId],
+            postfix: values[postfixId],
+            freezeGroup:  values[freezeGroupId]
+        })
+        // this.props._handleValidSubmit(`(${values[prefixId]}${values[textId]}${values[postfixId]})`);
     }
 
     handleInvalidSubmit(event, values) {
         console.log("handleInvalidSubmit ",  event, values);
-        this.props._handleInValidSubmit(this.props.groupUUID, values);
+        // this.props._handleInValidSubmit(this.props.groupUUID, values);
     }
 
     addNewRule(){
@@ -48,6 +69,7 @@ class CaptureGroupBuilder extends Component {
                                 <AvField
                                     name={`groupPrefix-${this.props.groupUUID}`}
                                     type="select"
+                                    disabled={this.state.freezeGroup ? true : false}
                                 >
                                     {
                                         this.props.prefixOptions.map((prefixOption, index)=>(
@@ -63,6 +85,8 @@ class CaptureGroupBuilder extends Component {
                                 <AvField
                                     name={`groupText-${this.props.groupUUID}`}
                                     type="text"
+                                    disabled={this.state.freezeGroup ? true : false}
+
                                 />
                             </AvGroup>
                         </Col>
@@ -71,6 +95,8 @@ class CaptureGroupBuilder extends Component {
                                 <AvField
                                     name={`groupPostfix-${this.props.groupUUID}`}
                                     type="select"
+                                    disabled={this.state.freezeGroup ? true : false}
+
                                 >
                                     {
                                         this.props.postfixOptions.map((postfixOption, index)=>(
@@ -84,9 +110,14 @@ class CaptureGroupBuilder extends Component {
                         <Col md="3" xs="12">
                             <AvGroup>
                                 <Row>
-                                    <Col md="8" xs="8">
+                                    <Col md="4" xs="4">
                                         <Button color="secondary">
-                                            <AvInput tag={CustomInput} type="checkbox" name={`groupCaptured-${this.props.groupUUID}`} label="Capture" />
+                                            <AvInput  disabled={this.state.freezeGroup ? true : false} tag={CustomInput} type="checkbox" name={`groupCaptured-${this.props.groupUUID}`} label="Capture"  />
+                                        </Button>
+                                    </Col>
+                                    <Col md="4" xs="4">
+                                        <Button color="secondary">
+                                            <AvInput  disabled={this.state.freezeGroup ? true : false} tag={CustomInput} type="checkbox" name={`freezeGroup-${this.props.groupUUID}`} label="Freeze"  />
                                         </Button>
                                     </Col>
                                     <Col md="2" xs="2">

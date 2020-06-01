@@ -13,10 +13,12 @@ class CapturePatternBuilder extends Component {
     constructor(props) {
         super(props);
 
-        this.handleValidSubmit = this.handleValidSubmit.bind(this);
-        this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
+        // this.handleValidSubmit = this.handleValidSubmit.bind(this);
+        // this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
         this.addNewRule = this.addNewRule.bind(this);
         this.removeRule = this.removeRule.bind(this);
+        this.addFirstGroup = this.addFirstGroup.bind(this);
+        this.generateCapturePattern = this.generateCapturePattern.bind(this);
 
         this.state = {
             captureGroups: [{
@@ -26,13 +28,28 @@ class CapturePatternBuilder extends Component {
 
     }
 
-    handleValidSubmit(values) {
-        console.log("CapturePatternBuilder::handleValidSubmit ", values);
+    // handleValidSubmit(groupPattern) {
+    //     console.log("CapturePatternBuilder::handleValidSubmit ", groupPattern);
         
+    // }
+
+    // handleInvalidSubmit(values) {
+    //     console.log("CapturePatternBuilder::handleInvalidSubmit ", values);
+
+    // }
+
+    addFirstGroup() {
+        console.log("CapturePatternBuilder::addFirstGroup");
+        this.currentID = 0;
+        this.setState({
+            captureGroups: [{
+                uuid: this.currentID,
+            }]
+        })
     }
 
-    handleInvalidSubmit(values) {
-        console.log("CapturePatternBuilder::handleInvalidSubmit ", values);
+    generateCapturePattern() {
+        console.log("CapturePatternBuilder::generateCapturePattern");
 
     }
 
@@ -98,13 +115,28 @@ class CapturePatternBuilder extends Component {
                                 },
                             ]}
 
-                            _handleValidSubmit={this.handleValidSubmit}
-                            _handleInvalidSubmit={this.handleInvalidSubmit}
+                            // _handleValidSubmit={this.handleValidSubmit}
+                            // _handleInvalidSubmit={this.handleInvalidSubmit}
                             _addNewRule={this.addNewRule}
                             _removeRule={this.removeRule}
                         ></CaptureGroupBuilder>
                     ))
                 }
+                <Row>
+                    <Col>
+                        <Button id="button-fluid" 
+                        onClick={this.state.captureGroups.length === 0 ? 
+                            this.addFirstGroup : 
+                            this.generateCapturePattern}>
+                            {
+                                this.state.captureGroups.length === 0 ? <FontAwesomeIcon icon={faPlus} /> : "Generate"
+                                
+                            }
+                        </Button>
+
+                    
+                    </Col>
+                </Row>
             </React.Fragment>
         );
     }
