@@ -19,10 +19,11 @@ class CapturePatternBuilder extends Component {
         this.removeRule = this.removeRule.bind(this);
         this.addFirstGroup = this.addFirstGroup.bind(this);
         this.generateCapturePattern = this.generateCapturePattern.bind(this);
-
+        
         this.state = {
             captureGroups: [{
                 uuid: this.currentID,
+                ref: React.createRef()
             }]
         }
 
@@ -44,13 +45,17 @@ class CapturePatternBuilder extends Component {
         this.setState({
             captureGroups: [{
                 uuid: this.currentID,
+                groups: React.createRef()
             }]
         })
     }
 
     generateCapturePattern() {
         console.log("CapturePatternBuilder::generateCapturePattern");
-
+        this.state.captureGroups.map((captureGroup, index)=>{
+            const captureGroupInputs = captureGroup.ref.current.state;
+            console.log("CAP ", captureGroupInputs.prefix);
+        })
     }
 
     addNewRule(groupUUID) {
@@ -64,6 +69,7 @@ class CapturePatternBuilder extends Component {
         this.currentID++;
         this.state.captureGroups.splice(nextGroupIndex, 0, {
             uuid: this.currentID,
+            ref: React.createRef()
         })
 
         this.setState({
@@ -94,7 +100,7 @@ class CapturePatternBuilder extends Component {
             <React.Fragment>
                 {
                     this.state.captureGroups.map((captureGroup, index) => (
-                        <CaptureGroupBuilder key={captureGroup.uuid} groupUUID={captureGroup.uuid} prefixOptions={[
+                        <CaptureGroupBuilder ref={captureGroup.ref} key={captureGroup.uuid} groupUUID={captureGroup.uuid} prefixOptions={[
                             {
                                 value: "Single Space"
                             },
