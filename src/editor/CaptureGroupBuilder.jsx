@@ -13,7 +13,6 @@ class CaptureGroupBuilder extends Component {
         this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
         this.addNewRule = this.addNewRule.bind(this);
         this.removeRule = this.removeRule.bind(this);
-
     }
 
     handleValidSubmit(event, values) {
@@ -27,12 +26,12 @@ class CaptureGroupBuilder extends Component {
     }
 
     addNewRule(){
-        console.log("addNewRule event triggered from");
+        // console.log("addNewRule event triggered from");
         this.props._addNewRule(this.props.groupUUID);
     }
 
     removeRule(){
-        console.log("removeRule");
+        // console.log("removeRule");
         this.props._removeRule(this.props.groupUUID);
     }
 
@@ -49,7 +48,6 @@ class CaptureGroupBuilder extends Component {
                                 <AvField
                                     name={`groupPrefix-${this.props.groupUUID}`}
                                     type="select"
-                                    value={this.props.groupPrefix}
                                 >
                                     {
                                         this.props.prefixOptions.map((prefixOption, index)=>(
@@ -65,7 +63,6 @@ class CaptureGroupBuilder extends Component {
                                 <AvField
                                     name={`groupText-${this.props.groupUUID}`}
                                     type="text"
-                                    value={this.props.groupUUID}
                                 />
                             </AvGroup>
                         </Col>
@@ -74,7 +71,6 @@ class CaptureGroupBuilder extends Component {
                                 <AvField
                                     name={`groupPostfix-${this.props.groupUUID}`}
                                     type="select"
-                                    value={this.props.groupPostfix}
                                 >
                                     {
                                         this.props.postfixOptions.map((postfixOption, index)=>(

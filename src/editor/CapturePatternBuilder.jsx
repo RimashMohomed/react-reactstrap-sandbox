@@ -37,20 +37,17 @@ class CapturePatternBuilder extends Component {
     }
 
     addNewRule(groupUUID) {
-        console.log("CapturePatternBuilder::addNewRule groupUUID", groupUUID, this.state.captureGroups)
+        // console.log("CapturePatternBuilder::addNewRule groupUUID", groupUUID, this.state.captureGroups)
 
         let nextGroupIndex = -1;
         for (let groupIndex = 0; groupIndex < this.state.captureGroups.length; groupIndex = groupIndex + 1) {
             if (this.state.captureGroups[groupIndex].uuid === groupUUID)
                 nextGroupIndex = groupIndex + 1;
         }
-        console.log("CapturePatternBuilder::addNewRule nextGroupIndex", nextGroupIndex)
         this.currentID++;
         this.state.captureGroups.splice(nextGroupIndex, 0, {
             uuid: this.currentID,
         })
-
-        console.log("CapturePatternBuilder::addNewRule groupIndex after", this.currentID, this.state.captureGroups)
 
         this.setState({
             captureGroups: this.state.captureGroups
@@ -67,11 +64,7 @@ class CapturePatternBuilder extends Component {
         }
         
         if(currentGroupIndex !== -1) {
-            console.log("CapturePatternBuilder::removeRule currentGroupIndex", currentGroupIndex)
-            this.state.captureGroups.splice(currentGroupIndex, 1)
-    
-            console.log("CapturePatternBuilder::removeRule groupIndex after", this.currentID, this.state.captureGroups)
-    
+            this.state.captureGroups.splice(currentGroupIndex, 1)    
             this.setState({
                 captureGroups: this.state.captureGroups
             })
@@ -83,9 +76,8 @@ class CapturePatternBuilder extends Component {
         return (
             <React.Fragment>
                 {
-                    console.log("Render---------"),
                     this.state.captureGroups.map((captureGroup, index) => (
-                        <CaptureGroupBuilder key={index} groupUUID={captureGroup.uuid} prefixOptions={[
+                        <CaptureGroupBuilder key={captureGroup.uuid} groupUUID={captureGroup.uuid} prefixOptions={[
                             {
                                 value: "Single Space"
                             },
