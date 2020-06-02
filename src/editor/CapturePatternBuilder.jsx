@@ -19,19 +19,20 @@ class CapturePatternBuilder extends Component {
         this.removeRule = this.removeRule.bind(this);
         this.addFirstGroup = this.addFirstGroup.bind(this);
         this.generateCapturePattern = this.generateCapturePattern.bind(this);
-        
+
         this.state = {
             captureGroups: [{
                 uuid: this.currentID,
                 ref: React.createRef()
-            }]
+            }],
+            pattern: undefined
         }
 
     }
 
     // handleValidSubmit(groupPattern) {
     //     console.log("CapturePatternBuilder::handleValidSubmit ", groupPattern);
-        
+
     // }
 
     // handleInvalidSubmit(values) {
@@ -51,11 +52,18 @@ class CapturePatternBuilder extends Component {
     }
 
     generateCapturePattern() {
-        console.log("CapturePatternBuilder::generateCapturePattern");
-        this.state.captureGroups.map((captureGroup, index)=>{
+        // console.log("CapturePatternBuilder::generateCapturePattern");
+        let patternStr = "";
+        this.state.captureGroups.map((captureGroup, index) => {
             const captureGroupInputs = captureGroup.ref.current.state;
-            console.log("CAP ", captureGroupInputs.prefix);
+            patternStr +=  captureGroupInputs.pattern
         })
+
+        this.setState({
+            pattern: patternStr
+        })
+        console.log("PATTERN ", this.state.pattern);
+
     }
 
     addNewRule(groupUUID) {
@@ -78,21 +86,21 @@ class CapturePatternBuilder extends Component {
     }
 
     removeRule(groupUUID) {
-        console.log("CapturePatternBuilder::removeRule groupUUID", groupUUID, this.state.captureGroups)
+        // console.log("CapturePatternBuilder::removeRule groupUUID", groupUUID, this.state.captureGroups)
 
         let currentGroupIndex = -1;
         for (let groupIndex = 0; groupIndex < this.state.captureGroups.length; groupIndex = groupIndex + 1) {
             if (this.state.captureGroups[groupIndex].uuid === groupUUID)
                 currentGroupIndex = groupIndex;
         }
-        
-        if(currentGroupIndex !== -1) {
-            this.state.captureGroups.splice(currentGroupIndex, 1)    
+
+        if (currentGroupIndex !== -1) {
+            this.state.captureGroups.splice(currentGroupIndex, 1)
             this.setState({
                 captureGroups: this.state.captureGroups
             })
         }
-        
+
     }
 
     render() {
@@ -100,24 +108,31 @@ class CapturePatternBuilder extends Component {
             <React.Fragment>
                 {
                     this.state.captureGroups.map((captureGroup, index) => (
-                        <CaptureGroupBuilder ref={captureGroup.ref} key={captureGroup.uuid} groupUUID={captureGroup.uuid} prefixOptions={[
-                            {
-                                value: "Single Space"
-                            },
-                            {
-                                value: "One or more Spacee"
-                            }
-                        ]}
+                        <CaptureGroupBuilder ref={captureGroup.ref} key={captureGroup.uuid} groupUUID={captureGroup.uuid}
+                            prefixOptions={[
+                                {
+                                    value: "Single Space",
+                                    pattern: "\\s"
+                                },
+                                {
+                                    value: "One or more Space",
+                                    pattern: "\\s*"
+                                }
+                            ]}
 
                             postfixOptions={[
                                 {
-                                    value: "One or more Space"
+                                    value: "One or more Space",
+                                    pattern: "\\s*"
                                 },
                                 {
-                                    value: "String"
+                                    value: "String",
+                                    pattern: "[a-z,A-Z]*"
+
                                 },
                                 {
-                                    value: "Number"
+                                    value: "Number",
+                                    pattern: "[0-9,.]+"
                                 },
                             ]}
 
@@ -130,18 +145,28 @@ class CapturePatternBuilder extends Component {
                 }
                 <Row>
                     <Col>
-                        <Button id="button-fluid" 
-                        onClick={this.state.captureGroups.length === 0 ? 
-                            this.addFirstGroup : 
-                            this.generateCapturePattern}>
+                        <Button id="button-fluid"
+                            onClick={this.state.captureGroups.length === 0 ?
+                                this.addFirstGroup :
+                                this.generateCapturePattern}>
                             {
                                 this.state.captureGroups.length === 0 ? <FontAwesomeIcon icon={faPlus} /> : "Generate"
-                                
+
                             }
                         </Button>
 
-                    
+
                     </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Toast id="toast-fluid">
+                            <ToastHeader>Pattern </ToastHeader>
+                            <ToastBody>
+                                {this.state.pattern}
+                            </ToastBody>
+                        </Toast>
+                    </Col>                    
                 </Row>
             </React.Fragment>
         );

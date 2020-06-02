@@ -13,18 +13,20 @@ class CaptureGroupBuilder extends Component {
         this.handleInvalidSubmit = this.handleInvalidSubmit.bind(this);
         this.addNewRule = this.addNewRule.bind(this);
         this.removeRule = this.removeRule.bind(this);
+        this.getPatternOf = this.getPatternOf.bind(this);
 
         this.state = {
             uuid: props.groupUUID,
             prefix: undefined,
             text: undefined,
             postfix: undefined,
-            freezeGroup: false
+            freezeGroup: false,
+            capturePattern: undefined
         }
     }
 
     handleValidSubmit(event, values) {
-        console.log("handleValidSubmit ", event, values);
+        // console.log("handleValidSubmit ", event, values);
 
         const prefixId = `groupPrefix-${this.props.groupUUID}`;
         const textId = `groupText-${this.props.groupUUID}`;
@@ -38,7 +40,21 @@ class CaptureGroupBuilder extends Component {
             postfix: values[postfixId],
             freezeGroup:  values[freezeGroupId]
         })
-        // this.props._handleValidSubmit(`(${values[prefixId]}${values[textId]}${values[postfixId]})`);
+        const prefixPattern  = this.getPatternOf(this.props.prefixOptions, this.state.prefix);
+        const postfixPattern = this.getPatternOf(this.props.postfixOptions, this.state.postfix);
+        console.log("prefixPattern", prefixPattern);
+        console.log("postfixPattern", postfixPattern);
+        this.setState({
+            pattern: `(${prefixPattern}${this.state.text}${postfixPattern})`
+        })
+    }
+
+    getPatternOf(alphabetArray, alphabetValue) {
+        console.log(`pattern of ${alphabetValue} from ${JSON.stringify(alphabetArray)}`)
+        for(const alphabet of alphabetArray){
+            if(alphabet.value === alphabetValue)
+                 return alphabet.pattern;
+        }
     }
 
     handleInvalidSubmit(event, values) {
