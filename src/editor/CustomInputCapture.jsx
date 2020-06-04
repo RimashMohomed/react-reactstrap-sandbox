@@ -21,7 +21,7 @@ class CustomInputCapture extends Component {
     render() {
         return (
             <InputGroup>
-                <Input value={this.state.value} onChange={this.handleChange} ref={this.props.myRef} placeholder={this.props.content}/>
+                <Input type={this.props.type} disabled={this.props.disabled} value={this.state.value} onChange={this.handleChange} ref={this.props.myRef} placeholder={this.props.content}/>
             </InputGroup>
         )
     }

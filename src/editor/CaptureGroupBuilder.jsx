@@ -119,12 +119,11 @@ class CaptureGroupBuilder extends Component {
             } else {
                 pattern += item.value;
             }
-            console.log("Patt ", pattern)
         })
 
         this.setState({
             freezeGroup: values[freezeGroupId],
-            pattern: `\\s*(${pattern}\\s*)`
+            pattern: `(${pattern})`
         })
     }
 
@@ -154,13 +153,15 @@ class CaptureGroupBuilder extends Component {
             id: `item-2`,
             content: `Specific Text`,
             value: '',
-            editable: true
+            editable: true,
+            type: "text"
         },
         {
             id: `item-3`,
             content: `Specific Number`,
             value: '',
-            editable: true
+            editable: true,
+            type: "number"
         },
         {
             id: `item-4`,
@@ -310,7 +311,7 @@ class CaptureGroupBuilder extends Component {
                                                                         
 
                                                                         item.editable ? 
-                                                                            <CustomInputCapture myRef={item.ref} placeholder={item.content}/>
+                                                                            <CustomInputCapture type={item.type} disabled={this.state.freezeGroup ? true : false} myRef={item.ref} placeholder={item.content}/>
                                                                             : item.content
 
                                                                         
