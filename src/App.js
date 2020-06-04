@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 import CapturePatternBuilder from './editor/CapturePatternBuilder';
+import FieldDefBuilder from './editor/FieldDefBuilder';
+import ExpressionBuilder from './editor/ExpressionBuilder';
 // function handleValidSubmit(values) {
 //   console.log("_handleValidSubmit ", values);
 
@@ -24,7 +26,7 @@ import CapturePatternBuilder from './editor/CapturePatternBuilder';
 function App() {
   return (
     <div className="App">
-      <CapturePatternBuilder></CapturePatternBuilder>
+      <FieldDefBuilder></FieldDefBuilder>
     </div>
   );
 }

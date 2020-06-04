@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Row, Col, CustomInput, FormGroup, Toast, ToastHeader, ToastBody, Button, Badge } from "reactstrap";
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 
-import CaptureGroupBuilder from './CaptureGroupBuilder';
+import CapturePatternBuilder from './CapturePatternBuilder';
 
 class FieldDefBuilder extends Component {
     render() {
         return (
             <React.Fragment>
+                <div >
                 <AvForm>
-                    <Row>
+                    <Row className="mb-2 mt-2 ml-2 mr-2">
                         <Col md="6" xs="12">
                             <Toast id="toast-fluid">
                                 <ToastHeader>Telegram Signal </ToastHeader>
@@ -18,7 +19,6 @@ class FieldDefBuilder extends Component {
                                         <AvField
                                             name="telegramMessage"
                                             type="textarea"
-                                            value={this.state.telegramMessage}
                                             validate={{
                                                 required: {
                                                     value: true,
@@ -35,42 +35,29 @@ class FieldDefBuilder extends Component {
                             <Toast id="toast-fluid">
                                 <ToastHeader>Trade Signal </ToastHeader>
                                 <ToastBody>
-                                    {
-                                        this.state.isValid ?
-                                            this.state && this.state.outputMessageFields && this.state.outputMessageFields.map((field, index) =>
-                                                <span id="outgoing-field" key={index} className="btn btn-outline-secondary">{field.name}<Badge color="secondary" className="rounded ml-2">{field.value}</Badge> </span>)
-                                            : <span id="outgoing-field" className="btn btn-outline-danger">Validation Failed<Badge color="danger" className="rounded ml-2"><i className="fas fa-exclamation-triangle"></i></Badge> </span>
-                                    }
+                 
                                 </ToastBody>
                             </Toast>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                        {
-                            this.state.ruleList.map((rule, index) => (
-                                <CaptureGroupBuilder key={index} />
-                            ))
-                        }
-                        </Col>
-                        
-                    </Row>
-                    <Row>
-                        <Col md="6" xs="12">
-                            DD
-                            </Col>
-                        <Col md="3" xs="12">
-                            <Button id="button-fluid">Evaluate</Button>
-                        </Col>
-                        <Col md="3" xs="12">
-                            <Button id="button-fluid" onClick={this.addNextRule}>Add new rule</Button>
+                            <CapturePatternBuilder></CapturePatternBuilder>
                         </Col>
                     </Row>
 
                 </AvForm>
+                </div>
             </React.Fragment>
         );
     }
 }
 
 export default FieldDefBuilder;
+
+// {
+//     this.state.isValid ?
+//         this.state && this.state.outputMessageFields && this.state.outputMessageFields.map((field, index) =>
+//             <span id="outgoing-field" key={index} className="btn btn-outline-secondary">{field.name}<Badge color="secondary" className="rounded ml-2">{field.value}</Badge> </span>)
+//         : <span id="outgoing-field" className="btn btn-outline-danger">Validation Failed<Badge color="danger" className="rounded ml-2"><i className="fas fa-exclamation-triangle"></i></Badge> </span>
+// }

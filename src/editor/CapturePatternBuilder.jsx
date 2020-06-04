@@ -143,7 +143,7 @@ class CapturePatternBuilder extends Component {
                         ></CaptureGroupBuilder>
                     ))
                 }
-                <Row>
+                <Row className="mb-2 mt-2 ml-2 mr-2" >
                     <Col>
                         <Button id="button-fluid"
                             onClick={this.state.captureGroups.length === 0 ?
@@ -158,7 +158,7 @@ class CapturePatternBuilder extends Component {
 
                     </Col>
                 </Row>
-                <Row>
+                <Row className="mb-2 mt-2 ml-2 mr-2">
                     <Col>
                         <Toast id="toast-fluid">
                             <ToastHeader>Pattern </ToastHeader>
