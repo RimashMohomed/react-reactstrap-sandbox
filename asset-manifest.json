@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/react-reactstrap-sandbox/static/css/main.f0d091f3.chunk.css",
-    "main.js": "/react-reactstrap-sandbox/static/js/main.778cab04.chunk.js",
-    "main.js.map": "/react-reactstrap-sandbox/static/js/main.778cab04.chunk.js.map",
+    "main.js": "/react-reactstrap-sandbox/static/js/main.5bf085d7.chunk.js",
+    "main.js.map": "/react-reactstrap-sandbox/static/js/main.5bf085d7.chunk.js.map",
     "runtime-main.js": "/react-reactstrap-sandbox/static/js/runtime-main.ab9a60f0.js",
     "runtime-main.js.map": "/react-reactstrap-sandbox/static/js/runtime-main.ab9a60f0.js.map",
     "static/css/2.829c9cb5.chunk.css": "/react-reactstrap-sandbox/static/css/2.829c9cb5.chunk.css",
-    "static/js/2.cf3e42c6.chunk.js": "/react-reactstrap-sandbox/static/js/2.cf3e42c6.chunk.js",
-    "static/js/2.cf3e42c6.chunk.js.map": "/react-reactstrap-sandbox/static/js/2.cf3e42c6.chunk.js.map",
+    "static/js/2.63f07b0b.chunk.js": "/react-reactstrap-sandbox/static/js/2.63f07b0b.chunk.js",
+    "static/js/2.63f07b0b.chunk.js.map": "/react-reactstrap-sandbox/static/js/2.63f07b0b.chunk.js.map",
     "index.html": "/react-reactstrap-sandbox/index.html",
-    "precache-manifest.79b4ff55e6c2fa6e93d8f43ef9dba3d5.js": "/react-reactstrap-sandbox/precache-manifest.79b4ff55e6c2fa6e93d8f43ef9dba3d5.js",
+    "precache-manifest.c1fdf972e99e4f876bb873e64a0c649f.js": "/react-reactstrap-sandbox/precache-manifest.c1fdf972e99e4f876bb873e64a0c649f.js",
     "service-worker.js": "/react-reactstrap-sandbox/service-worker.js",
     "static/css/2.829c9cb5.chunk.css.map": "/react-reactstrap-sandbox/static/css/2.829c9cb5.chunk.css.map",
     "static/css/main.f0d091f3.chunk.css.map": "/react-reactstrap-sandbox/static/css/main.f0d091f3.chunk.css.map",
-    "static/js/2.cf3e42c6.chunk.js.LICENSE.txt": "/react-reactstrap-sandbox/static/js/2.cf3e42c6.chunk.js.LICENSE.txt",
+    "static/js/2.63f07b0b.chunk.js.LICENSE.txt": "/react-reactstrap-sandbox/static/js/2.63f07b0b.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/react-reactstrap-sandbox/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ab9a60f0.js",
     "static/css/2.829c9cb5.chunk.css",
-    "static/js/2.cf3e42c6.chunk.js",
+    "static/js/2.63f07b0b.chunk.js",
     "static/css/main.f0d091f3.chunk.css",
-    "static/js/main.778cab04.chunk.js"
+    "static/js/main.5bf085d7.chunk.js"
   ]
 }
