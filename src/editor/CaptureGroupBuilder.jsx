@@ -100,7 +100,7 @@ class CaptureGroupBuilder extends Component {
 
 
     handleValidSubmit(event, values) {
-        // console.log("handleValidSubmit ", event, values);
+        console.log("handleValidSubmit ", event, values);
         const groupCapturedId = `groupCaptured-${this.props.groupUUID}`;
         const freezeGroupId = `freezeGroup-${this.props.groupUUID}`;
         const customInputId = `customInput-${this.props.groupUUID}`;
@@ -123,6 +123,7 @@ class CaptureGroupBuilder extends Component {
 
         this.setState({
             freezeGroup: values[freezeGroupId],
+            capturePattern: values[groupCapturedId],
             pattern: `(${pattern})`
         })
     }
@@ -336,14 +337,14 @@ class CaptureGroupBuilder extends Component {
                                 <Row className="mb-2">
                                     <Col md="12" xs="12">
                                         <Button id="button-fluid" color="secondary">
-                                            <AvInput disabled={this.state.freezeGroup ? true : false} tag={CustomInput} type="checkbox" name={`groupCaptured-${this.props.groupUUID}`} label="Capture" />
+                                            <AvInput disabled={this.state.freezeGroup ? true : false} tag={CustomInput} type="checkbox" name={`freezeGroup-${this.props.groupUUID}`} label="Freeze" />
                                         </Button>
                                     </Col>
                                 </Row>
                                 <Row className="mb-2">
                                     <Col md="12" xs="12">
                                         <Button id="button-fluid" color="secondary">
-                                            <AvInput disabled={this.state.freezeGroup ? true : false} tag={CustomInput} type="checkbox" name={`freezeGroup-${this.props.groupUUID}`} label="Freeze" />
+                                            <AvInput disabled={this.state.freezeGroup ? true : false} tag={CustomInput} type="checkbox" name={`groupCaptured-${this.props.groupUUID}`} label="Capture" />
                                         </Button>
                                     </Col>
                                 </Row>

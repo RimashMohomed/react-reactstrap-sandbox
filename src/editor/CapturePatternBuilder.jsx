@@ -25,7 +25,8 @@ class CapturePatternBuilder extends Component {
                 uuid: this.currentID,
                 ref: React.createRef()
             }],
-            pattern: undefined
+            pattern: undefined,
+            output: undefined
         }
 
     }
@@ -52,18 +53,32 @@ class CapturePatternBuilder extends Component {
     }
 
     generateCapturePattern() {
-        // console.log("CapturePatternBuilder::generateCapturePattern");
         let patternStr = "";
+        const capture = [];
         this.state.captureGroups.map((captureGroup, index) => {
-            const captureGroupInputs = captureGroup.ref.current.state;
-            patternStr +=  captureGroupInputs.pattern
+            patternStr +=  captureGroup.ref.current.state.pattern
+            if(captureGroup.ref.current.state.capturePattern){
+                capture.push(true);
+            } else {
+                capture.push(false);
+            }
         })
 
         this.setState({
             pattern: patternStr
         })
-        console.log("PATTERN ", this.state.pattern);
-
+        const tokens = this.props.text.match(new RegExp(patternStr), 'gi');
+        tokens.shift();
+        console.log("PA1 ", tokens);
+        const value = tokens.map((token, index) =>{
+            if(capture[index] === true){
+                return token;
+            }
+        })
+        console.log("PA2 ", value);
+        this.setState({
+            output:  value.join(' ')
+        })
     }
 
     addNewRule(groupUUID) {
@@ -164,6 +179,7 @@ class CapturePatternBuilder extends Component {
                             <ToastHeader>Pattern </ToastHeader>
                             <ToastBody>
                                 {this.state.pattern}
+                                {this.state.output}
                             </ToastBody>
                         </Toast>
                     </Col>                    

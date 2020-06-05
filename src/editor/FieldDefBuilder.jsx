@@ -4,7 +4,30 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 import CapturePatternBuilder from './CapturePatternBuilder';
 
+const myText = 'BUY #GBPUSD @1.83600\
+Tp @ 1.84200\
+Tp2 @ 1.84700\
+ Buy 2 @1.82600\
+TP @ 1.83600\
+SL 1.81600'
 class FieldDefBuilder extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleChange = this.handleChange.bind(this);
+
+        this.state = {
+            telegramMessage: undefined
+        }
+    }
+
+    handleChange(event) {
+        console.log("Event ", event)
+        this.setState({
+            telegramMessage: event.target.value
+        })
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -25,6 +48,8 @@ class FieldDefBuilder extends Component {
                                                     errorMessage: 'Telegram Message is required'
                                                 }
                                             }}
+                                            onChange={this.handleChange}
+                                            value={this.state.telegramMessage}
                                         />
                                     </FormGroup>
                                 </ToastBody>
@@ -42,7 +67,7 @@ class FieldDefBuilder extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            <CapturePatternBuilder></CapturePatternBuilder>
+                            <CapturePatternBuilder text={this.state.telegramMessage}></CapturePatternBuilder>
                         </Col>
                     </Row>
 
